@@ -1,0 +1,27 @@
+# 	-
+#		- ProductId
+#		- { testParam: testValue, ... }
+#		
+-
+	- 1
+	- { width: 12, height: 14 }
+
+-
+	- 2
+	- { length: 15, weight: 13, destination_id: 2 }
+
+-
+	- 3
+	- { length: 20, destination_type: product }
+
+-
+	- 6
+	- { length: 10, destination_type: config }
+
+-
+	- 4
+	- { height: 23, destination_type: category, destination_id: 3 }
+
+-
+	- 7
+	- { width: 25, length: 22, size: 47, destination_type: category, destination_id: 3 }

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<checkout_onepage_additional translate="label">
+		<block type="checkout/onepage_shipping_method_additional" name="tiramizoo_action" output="toHtml" template="tiramizoo/shipping/method/action.phtml"/>
+	</checkout_onepage_additional>
+</layout>

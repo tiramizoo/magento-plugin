@@ -1,0 +1,39 @@
+-
+    -
+        0: {id: 1, dimensions: {width: 20, height: 30, length: 20, weight: 4}, quantity: 1, description: null, packed_individually: false }
+        1: {id: 2, dimensions: {width: 10, height: 31, length: 20, weight: 4}, quantity: 1, description: null, packed_individually: false }
+    - 'onepackage'
+    -
+        0: {weight: 2, width: 31, height: 21, length: 11, quantity: 1, description: null }
+
+-
+    -
+        0: {id: 1, dimensions: {width: 20, height: 30, length: 20, weight: 4}, quantity: 1, description: null, packed_individually: false }
+        1: {id: 4, dimensions: {width: 207, height: 360, length: 208, weight: 49}, quantity: 1, description: null, packed_individually: false }
+        2: {id: 2, dimensions: {width: 20, height: 30, length: 20, weight: 2}, quantity: 1, description: null, packed_individually: false }
+    - 'onepackage'
+    -
+        0: {weight: 2, width: 31, height: 21, length: 11, quantity: 1, description: null }
+
+-
+    - []
+    - 'onepackage'
+    - []
+
+-
+    -
+        0: {id: 1, dimensions: {width: 22, height: 32, length: 42, weight: 4}, quantity: 1, description: 'some product 1', packed_individually: false }
+        1: {id: 2, dimensions: {width: 33, height: 25, length: 27, weight: 1}, quantity: 2, description: 'some product 2', packed_individually: false }
+    - 'individual'
+    -
+        0: {weight: 4, width: 22, height: 32, length: 42, quantity: 1, description: 'some product 1' }
+        1: {weight: 1, width: 33, height: 25, length: 27, quantity: 2, description: 'some product 2' }
+
+-
+    -
+        0: {id: 1, dimensions: {width: 22, height: 32, length: 42, weight: 4}, quantity: 1, description: 'some product 1', packed_individually: false }
+        1: {id: 2, dimensions: {width: 33, height: 25, length: 27, weight: 1}, quantity: 2, description: 'some product 2', packed_individually: false }
+    - 'packages'
+    -
+        0: {weight: 4, width: 22, height: 32, length: 42, quantity: 1, description: 'some product 1', bundle: true }
+        1: {weight: 1, width: 33, height: 25, length: 27, quantity: 2, description: 'some product 2', bundle: true }

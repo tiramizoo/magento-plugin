@@ -1,0 +1,22 @@
+# 	-
+#		- categoryId
+#		- { testParam: testValue, ... }
+#		
+-
+	- 2 
+	- { width: 20, height: 40 }
+-
+	- 6
+	- { length: 10, weight: 40, destination_id: 3 }
+-
+	- 8
+	- { width: 20, length: 20, size: 40, destination_type: category, destination_id: 8 }
+-
+	- 9
+	- { size: 40, destination_type: category, destination_id: 3 }
+-
+	- 5
+	- { size: 70, destination_type: category, destination_id: 2 }
+-
+	- 1
+	- { size: 40, destination_type: config }

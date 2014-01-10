@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Tiramizoo_Shipping>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Tiramizoo_Shipping>
+    </modules>
+</config>

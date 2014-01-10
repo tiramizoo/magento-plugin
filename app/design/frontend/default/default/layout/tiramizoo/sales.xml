@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<layout version="1.0.0">
+	<sales_email_order_tiramizoo_tracking_url>
+			<block type="tiramizoo/order_email_tracking" name="tracking_url" template="tiramizoo/order/email/tracking.phtml" />
+	</sales_email_order_tiramizoo_tracking_url>
+</layout>

@@ -1,0 +1,69 @@
+<?php 
+    $rates = Mage::helper('tiramizoo_shipping/data')->getAvailableShippingRates();
+
+    foreach($rates as $shippingMethod => $rate) {
+        $timeWindow = Mage::getSingleton('checkout/session')->getData('tiramizoo_'.$rate.'_time_window');
+        if ($timeWindow) {
+            echo '<input type="hidden" id="'.$shippingMethod.'" name="tiramizoo_'.$rate.'_hash" value="'.$timeWindow->getHash().'" class="validate-tiramizoo-hash">';
+        }
+    }
+?>
+
+<script type="text/javascript">
+
+    if (window.tiramizoo_error === undefined) {
+        var tiramizoo_error = false;
+    }
+
+    if (window.tiramizoo_error) {
+        alert('Tiramizoo time window is not valid! Back to the previous step and try again.');
+        window.tiramizoo_error = false;
+    }
+
+    if (Validation) {
+        Validation.add('validate-tiramizoo-hash', null, function(hash, elem) {
+            var result = false;
+            var shipping_method = $('s_method_'+elem.id);
+
+            if (shipping_method.checked) {
+                shipping_method = shipping_method.value;
+
+                var availableShippingRates = <?= json_encode(array_keys($rates)) ?>;
+                
+                if (availableShippingRates.indexOf(shipping_method) != -1) {
+                    var url = "<?php echo Mage::getUrl('tiramizoo/index/checkTimeWindow') ?>";    
+                    new Ajax.Request(url, {
+                        method: 'get',
+                        asynchronous: false,
+                        parameters: {
+                            shippingMethod: shipping_method,
+                            hash: hash
+                        }, 
+                        requestHeaders: {Accept: 'application/json'},
+                        onSuccess: function(transport) {
+                            if (!transport.responseJSON.valid) {
+                                result = false;
+                                window.tiramizoo_error = true;
+                                shipping.save();
+                            } else {
+                                result = true;
+                            }
+                        },
+                        onError: function() {
+                            result = false;
+                            window.tiramizoo_error = true;                            
+                            shipping.save();
+                        }
+                    });
+                } else {
+                    result = true;
+                }
+            } else {
+                result = true;
+            }
+            return result;
+        });
+    } else {
+        console.log('Validation is not defined');
+    }
+</script>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<layout>
+    <adminhtml_catalog_product_new>
+        <reference name="product_tabs">
+            <action method="addTab">
+                <name>tiramizoo_shipping</name>
+                <block>tiramizoo/adminhtml_catalog_product_tab_action</block>
+            </action>
+        </reference>
+    </adminhtml_catalog_product_new>
+    <adminhtml_catalog_product_edit>
+        <reference name="product_tabs">
+            <action method="addTab">
+                <name>tiramizoo_shipping</name>
+                <block>tiramizoo/adminhtml_catalog_product_tab_action</block>
+            </action>
+        </reference>
+    </adminhtml_catalog_product_edit>
+    <adminhtml_sales_order_view>
+        <reference name="sales_order_tabs">
+            <action method="addTab">
+                <name>tiramizoo_shipping</name>
+                <block>tiramizoo/adminhtml_order_view_tab_tiramizoo</block>
+            </action>
+        </reference>
+    </adminhtml_sales_order_view>
+</layout>

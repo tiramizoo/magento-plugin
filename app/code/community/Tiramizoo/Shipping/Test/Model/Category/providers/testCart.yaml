@@ -1,0 +1,38 @@
+# [ ProductIds, ... ]
+# testCart: true/false
+# [ PackageSizes ] //temporary
+-
+	- []
+	- false
+	- 
+		0: { name: XXL, max_weight: 40, size: 310, express: true, standard_price: 1094, express_price: 1495 }
+
+-
+	- [ 2 ]
+	- true
+	- 
+		0: { name: XXL, max_weight: 40, size: 310, express: true, standard_price: 1094, express_price: 1495 }
+
+-
+	- [ 3 ]
+	- true
+	- 
+		0: { name: XXL, max_weight: 40, size: 310, express: true, standard_price: 1094, express_price: 1495 }
+
+-
+	- [ 2, 3 ]
+	- true
+	- 
+		0: { name: XXL, max_weight: 40, size: 310, express: true, standard_price: 1094, express_price: 1495 }
+
+-
+	- [ 4 ]
+	- false
+	- 
+		0: { name: XXL, max_weight: 40, size: 310, express: true, standard_price: 1094, express_price: 1495 }
+
+-
+	- [ 5 ]
+	- false
+	- 
+		0: { name: XXL, max_weight: 40, size: 310, express: true, standard_price: 1094, express_price: 1495 }

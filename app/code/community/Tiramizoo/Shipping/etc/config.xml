@@ -1,0 +1,275 @@
+<?xml version="1.0"?>
+<config>
+
+    <modules>
+        <Tiramizoo_Shipping>
+            <version>0.1.0</version>
+        </Tiramizoo_Shipping>
+    </modules>
+
+    <default>
+        <carriers>
+            <tiramizoo>
+                    <active>1</active>
+                    <sallowspecific>0</sallowspecific>
+                    <model>Tiramizoo_Shipping_Model_Carrier_Tiramizoo</model>
+                    <name>Tiramizoo</name>
+                    <title>Tiramizoo</title>
+                    <specificerrmsg>
+                        This shipping method is currently unavailable.
+                        If you would like to ship using this shipping
+                        method, please contact us.
+                    </specificerrmsg>
+                    <handling_type>F</handling_type>
+            </tiramizoo>
+        </carriers>
+    </default>
+
+
+    <global>
+        <models>
+            <tiramizoo>
+                <class>Tiramizoo_Shipping_Model</class>
+                <resourceModel>tiramizoo_mysql4</resourceModel>
+            </tiramizoo>
+
+            <tiramizoo_mysql4>
+                <class>Tiramizoo_Shipping_Model_Mysql4</class>
+                <entities>
+                    <order>
+                        <table>tiramizoo_order</table>
+                    </order>
+                </entities>
+            </tiramizoo_mysql4>
+
+            <checkout>
+                <rewrite>
+                    <type_onepage>Tiramizoo_Shipping_Model_Type_Onepage</type_onepage>
+                </rewrite>
+            </checkout>
+        </models>
+
+        <blocks>
+            <tiramizoo>
+                <class>Tiramizoo_Shipping_Block</class>
+            </tiramizoo>
+        </blocks>
+
+        <resources>
+            <tiramizoo_setup>
+                <setup>
+                    <module>Tiramizoo_Shipping</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </tiramizoo_setup>
+            <tiramizoo_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </tiramizoo_write>
+            <tiramizoo_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </tiramizoo_read>
+        </resources>
+
+        <helpers>
+            <tiramizoo_shipping>
+                <class>Tiramizoo_Shipping_Helper</class>
+            </tiramizoo_shipping>
+        </helpers>
+
+        <events>
+            <admin_system_config_changed_section_tiramizoo_config>
+                <observers>
+                    <tiramizoo_config_changed>
+                        <type>singleton</type>
+                        <class>Tiramizoo_Shipping_Model_Observer</class>
+                        <method>changeConfig</method>
+                    </tiramizoo_config_changed>
+                </observers>
+            </admin_system_config_changed_section_tiramizoo_config>
+
+            <sales_model_service_quote_submit_success>
+                <observers>
+                    <tiramizoo_quote_submit_success>
+                        <type>singleton</type>
+                        <class>Tiramizoo_Shipping_Model_Observer</class>
+                        <method>saveOrderSuccess</method>
+                    </tiramizoo_quote_submit_success>
+                </observers>
+            </sales_model_service_quote_submit_success>
+
+            <checkout_type_onepage_save_order_before>
+                <observers>
+                    <tiramizoo_checkout_type_onepage_save_order_before>
+                        <type>singleton</type>
+                        <class>Tiramizoo_Shipping_Model_Observer</class>
+                        <method>saveOrderBefore</method>
+                    </tiramizoo_checkout_type_onepage_save_order_before>
+                </observers>
+            </checkout_type_onepage_save_order_before>
+
+            <checkout_controller_onepage_save_shipping_method>
+                <observers>
+                    <tiramizoo_save_shipping_method_data>
+                        <type>singleton</type>
+                        <class>Tiramizoo_Shipping_Model_Observer</class>
+                        <method>saveShippingMethod</method>
+                    </tiramizoo_save_shipping_method_data>
+                </observers>
+            </checkout_controller_onepage_save_shipping_method>
+
+            <payment_method_is_active>
+                <observers>
+                    <tiramizoo_payment_methods>
+                        <type>singleton</type>
+                        <class>Tiramizoo_Shipping_Model_Observer</class>
+                        <method>paymentMethodIsActive</method>
+                    </tiramizoo_payment_methods>
+                </observers>
+            </payment_method_is_active>
+
+            <!-- START Test Events -->
+            <tiramizoo_shipping_convert_product_dimensions>
+                <observers>
+                    <convert_product_dimensions>
+                        <type>singleton</type>
+                        <class>Tiramizoo_Shipping_Model_TestObserver</class>
+                        <method>convertProductDimensions</method>
+                    </convert_product_dimensions>
+                </observers>
+            </tiramizoo_shipping_convert_product_dimensions>
+
+            <tiramizoo_shipping_convert_category_dimensions>
+                <observers>
+                    <convert_category_dimensions>
+                        <type>singleton</type>
+                        <class>Tiramizoo_Shipping_Model_TestObserver</class>
+                        <method>convertCategoryDimensions</method>
+                    </convert_category_dimensions>
+                </observers>
+            </tiramizoo_shipping_convert_category_dimensions>
+
+            <tiramizoo_shipping_modify_rates_price>
+                <observers>
+                    <modify_rates_price>
+                        <type>singleton</type>
+                        <class>Tiramizoo_Shipping_Model_TestObserver</class>
+                        <method>ratesPrice</method>
+                    </modify_rates_price>
+                </observers>
+            </tiramizoo_shipping_modify_rates_price>
+            <!-- END Test Events -->
+
+        </events>
+
+
+    </global>
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <tiramizoo>
+                    <file>tiramizoo.xml</file>
+                </tiramizoo>
+            </updates>
+        </layout>
+        <events>
+            <catalog_product_save_after>
+                <observers>
+                    <tiramizoo_save_product_data>
+                        <type>singleton</type>
+                        <class>Tiramizoo_Shipping_Model_Observer</class>
+                        <method>saveProductTabData</method>
+                    </tiramizoo_save_product_data>
+                </observers>
+            </catalog_product_save_after>
+        </events>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <tiramizoo_config>
+                                            <title>Tiramizoo</title>
+                                        </tiramizoo_config>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+
+    <frontend>
+        <routers>
+            <tiramizoo>
+                <use>standard</use>
+                <args>
+                    <module>Tiramizoo_Shipping</module>
+                    <frontName>tiramizoo</frontName>
+                </args>
+            </tiramizoo>
+        </routers>
+
+        <layout>
+            <updates>
+                <tiramizoo>
+                    <file>tiramizoo/checkout.xml</file>
+                </tiramizoo>
+                <tiramizoo_email>
+                    <file>tiramizoo/sales.xml</file>
+                </tiramizoo_email>
+            </updates>
+        </layout>
+    </frontend>
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <tiramizoo before="Mage_Adminhtml">Tiramizoo_Shipping_Adminhtml</tiramizoo>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+    <crontab>
+        <jobs>
+            <tiramizoo_synchronize>
+                <schedule>
+                    <!-- @todo: for test only in produciton use <cron_expr>0,5,10,15,20,25,30,35,40,45,50,55 * * * *</cron_expr> -->
+                    <cron_expr>* * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <!-- @todo: Call only 1 time per day, change cron method avoid to running every time -->
+                    <model>tiramizoo/retaillocations::synchronize</model>
+                </run>
+            </tiramizoo_synchronize>
+        </jobs>
+    </crontab>
+
+    <phpunit>
+        <suite>
+            <modules>
+                <Tiramizoo_Shipping />
+            </modules>
+        </suite>
+    </phpunit>
+
+
+</config>
