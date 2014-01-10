@@ -114,9 +114,6 @@ The main configuration of tiramizoo delivery is available on the tiramizoo websi
 -   **Enable Evening delivery type:** (Profile -> Account -> Time window preset)
     Select time window to enable Evening delivery type or left blank to disable.
 
--   **Retail location name:** (Profile -> Account -> Name)
-    Name of retail location presented on Oxid tiramizoo settings.
-
 -   **Business hours:** (Profile -> Account -> Business hours)
     Specify when courier can pick up delivery. Selected days and hours could be extended by special days *e.g. 24/12/2013 8:00-14:00* (in this example business hours are reduced).
 
@@ -184,6 +181,6 @@ The tiramizoo shipping method is only available if the following rules are met:
 ## Troubleshooting and bugs ##
 
 -   Check "Minimal configurations" section of this document
--   Use the newest version of plugin from [master branch](https://github.com/tiramizoo/oxid-plugin/tree/master) and Your eShop version is 4.7.x/5.0.x.
--   In case of any issues or suggestions please let us know through [github issues](https://github.com/tiramizoo/oxid-plugin/issues)
+-   Use the newest version of plugin from [master branch](https://github.com/tiramizoo/magento-plugin/tree/master) and Your eShop version is 4.7.x/5.0.x.
+-   In case of any issues or suggestions please let us know through [github issues](https://github.com/tiramizoo/magento-plugin/issues)
 
