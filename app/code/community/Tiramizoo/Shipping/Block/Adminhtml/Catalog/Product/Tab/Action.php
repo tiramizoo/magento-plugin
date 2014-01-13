@@ -24,7 +24,7 @@ class Tiramizoo_Shipping_Block_Adminhtml_Catalog_Product_Tab_Action
      */
     public function getTabLabel()
     {
-        return $this->__('Tiramizoo');
+        return $this->__('Tiramizoo Options');
     }
      
     /**

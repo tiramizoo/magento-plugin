@@ -178,7 +178,25 @@
                 </tiramizoo>
             </updates>
         </layout>
+        <translate>
+            <modules>
+                <Tiramizoo_Shipping>
+                    <files>
+                        <default>Tiramizoo_Shipping.csv</default>
+                    </files>
+                </Tiramizoo_Shipping>
+            </modules>
+        </translate>
         <events>
+            <controller_action_predispatch>
+                <observers>
+                    <tiramizoo_notification>
+                        <type>singleton</type>
+                        <class>Tiramizoo_Shipping_Model_Feed</class>
+                        <method>observe</method>
+                    </tiramizoo_notification>
+                </observers>
+            </controller_action_predispatch>
             <catalog_product_save_after>
                 <observers>
                     <tiramizoo_save_product_data>
@@ -234,6 +252,17 @@
                 </tiramizoo_email>
             </updates>
         </layout>
+
+        <translate>
+            <modules>
+                <tiramizoo>
+                    <files>
+                        <default>Tiramizoo_Shipping.csv</default>
+                    </files>
+                </tiramizoo>
+            </modules>
+        </translate>
+
     </frontend>
 
     <admin>
@@ -252,14 +281,20 @@
         <jobs>
             <tiramizoo_synchronize>
                 <schedule>
-                    <!-- @todo: for test only in produciton use <cron_expr>0,5,10,15,20,25,30,35,40,45,50,55 * * * *</cron_expr> -->
-                    <cron_expr>* * * * *</cron_expr>
+                    <cron_expr>0 1,5,9,13,17,21 * * *</cron_expr>
                 </schedule>
                 <run>
-                    <!-- @todo: Call only 1 time per day, change cron method avoid to running every time -->
                     <model>tiramizoo/retaillocations::synchronize</model>
                 </run>
             </tiramizoo_synchronize>
+            <tiramizoo_resend>
+                <schedule>
+                    <cron_expr>0,5,10,15,20,25,30,35,40,45,50,55 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>tiramizoo/resend::check</model>
+                </run>
+            </tiramizoo_resend>
         </jobs>
     </crontab>
 

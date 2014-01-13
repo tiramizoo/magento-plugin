@@ -11,15 +11,15 @@ class Tiramizoo_Shipping_Model_Config_Packingstrategy
     {
         return array(
             array(
-                'label' => 'All products have individual dimensions',
+                'label' => Mage::helper('tiramizoo_shipping')->__('All products have individual dimensions'),
                 'value' => 'individual'
             ),
             array(
-                'label' => 'Specific dimensions of packages (specified from tiramizoo dashboard)',
+                'label' => Mage::helper('tiramizoo_shipping')->__('Specific dimensions of packages (specified from tiramizoo dashboard)'),
                 'value' => 'packages'
             ),
             array(
-                'label' => 'All products should fit to one package',
+                'label' => Mage::helper('tiramizoo_shipping')->__('All products should fit to one package'),
                 'value' => 'onepackage'
             ),
         );

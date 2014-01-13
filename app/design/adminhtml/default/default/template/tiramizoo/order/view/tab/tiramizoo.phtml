@@ -12,9 +12,13 @@
 						<td class="value"><input type="text" class="input-text" value="<?php echo $tiramizoo->getTrackingUrl() ?>"/></td>
 					</tr>
 					<tr>
+						<td class="label"><?php echo __('Status') ?></td>
+						<td class="value"><input type="text" class="input-text" value="<?php echo $tiramizoo->getStatus() ?>"/></td>
+					</tr>
+					<tr>
 						<td class="label"><?php echo __('External ID') ?></td>
 						<td class="value"><input type="text" class="input-text" value="<?php echo $tiramizoo->getExternalId() ?>"/></td>
-					</tr>					
+					</tr>
 					<tr>
 						<td class="label"><?php echo __('API Request') ?></td>
 						<td class="value"><textarea><?php echo print_r(json_decode($tiramizoo->getApiRequest())) ?></textarea></td>
@@ -22,7 +26,7 @@
 					<tr>
 						<td class="label"><?php echo __('API Response') ?></td>
 						<td class="value"><textarea><?php echo print_r(json_decode($tiramizoo->getApiResponse())) ?></textarea></td>
-					</tr>					
+					</tr>
 				</tbody>
 			</table>
 		</div>

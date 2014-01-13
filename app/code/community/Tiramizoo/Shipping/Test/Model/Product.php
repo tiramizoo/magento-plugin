@@ -144,7 +144,7 @@ class Tiramizoo_Shipping_Test_Model_Product extends EcomDev_PHPUnit_Test_Case
     * @doNotIndexAll
     * @dataProvider dataProvider
     * */
-    public function testProductIsPackedIndividually($productId, $value)
+    public function testProductIsPackedIndividually($productId, $value, $packingStrategy = 'packages')
     {
         $storeId = Mage::app()->getStore(0)->getId();
 
@@ -152,7 +152,13 @@ class Tiramizoo_Shipping_Test_Model_Product extends EcomDev_PHPUnit_Test_Case
             ->setStoreId($storeId)
             ->load($productId);
 
-        $tiramizooProduct = Mage::getModel('tiramizoo/product', $product);
+        $tiramizooProduct = $this->getModelMock('tiramizoo/product', array('getPackingStrategy'), false, array($product));
+
+        $tiramizooProduct->expects($this->any())
+            ->method('getPackingStrategy')
+            ->will($this->returnValue($packingStrategy));
+
+        // $tiramizooProduct = Mage::getModel('tiramizoo/product', $product);
 
         $this->assertEquals(
             $tiramizooProduct->isPackedIndividually(),

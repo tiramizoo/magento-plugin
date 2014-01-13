@@ -86,16 +86,19 @@ class Tiramizoo_Shipping_Model_Category
     {
         $data = $this->getParent();
 
-        // $packedIds = array();
-        $return = false;
+        $return = null;
 
         foreach ($data as $id => $catData) {
+            if ($catData['packed'] == -1) {
+                $return = false;
+                break;
+            }
+            
             if ($catData['packed'] == 1) {
-                // $packedIds[] = $id;
                 $return = true;
             }
         }
-        // return $packedIds;
+
         return $return;
     }
 

@@ -191,20 +191,42 @@ class Tiramizoo_Shipping_Model_Product
     {
         $attributes = $this->getAttributes();
 
-        $packedIndividually = in_array($attributes->getPackedIndividually(), array(1));
+        $packedIndividually = null;
 
-        if (count($categoryIds = $this->_product->getCategoryIds()) > 0) {
+        //check value from product
+        if ($attributes->getPackedIndividually() == 1) {
+            $packedIndividually = true;
+        } else if ($attributes->getPackedIndividually() == -1) {
+            $packedIndividually = false;
+        }
+
+        //check from category
+        if ($packedIndividually === null && count($categoryIds = $this->_product->getCategoryIds()) > 0) {
 
             $categoryIds = $this->getSubtreeLeafsIds($categoryIds);
             foreach ($categoryIds as $categoryId) {
                 $category = $this->getCategory($categoryId);
 
-                if ($category->isPackedIndividually()) {
+                $packed = $category->isPackedIndividually();
+                if ($packed === false) {
+                    $packedIndividually = false;
+                    break;
+                } elseif ($packed === true) {
                     $packedIndividually = true;
                 }
             }
         }
 
+        //check from config
+        if ($packedIndividually === null) {
+            $packedIndividually = $this->getPackingStrategy()  == 'individual';
+        }
+
         return $packedIndividually;
+    }
+
+    public function getPackingStrategy()
+    {
+        return Mage::getStoreConfig('tiramizoo_config/api_config/packing_strategy');
     }
 }

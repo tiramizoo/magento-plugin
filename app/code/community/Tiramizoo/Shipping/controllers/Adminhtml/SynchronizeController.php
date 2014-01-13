@@ -7,7 +7,7 @@ class Tiramizoo_Shipping_Adminhtml_SynchronizeController extends Mage_Adminhtml_
     {
         Mage::getModel('tiramizoo/retaillocations')->synchronize();
 
-        $message = 'Retail location configs were synchronised successfully';
+        $message = $this->__('Retail location configs were synchronised successfully');
         Mage::getSingleton('core/session')->addSuccess($message);
 
         //@todo: multistore enable

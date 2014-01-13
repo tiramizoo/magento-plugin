@@ -9,12 +9,11 @@
 	    <div class="hor-scroll">
 			<table cellspacing="0" class="form-list">
 				<tbody>
-
 					<tr>
-						<td class="label"><label for="tiramizoo_enable"><?php echo $this->__('Enable') ?></label></td>
+						<td class="label"><label for="tiramizoo_enable"><?php echo $this->__('Is enable') ?></label></td>
 						<td class="value">
 							<select id="tiramizoo_enable" name="tiramizoo_enable">
-							<?php 
+							<?php
 								$options = Mage::getModel('tiramizoo/entity_attribute_source_enable')
 									->getAllOptions();
 							foreach ($options as $option): ?>
@@ -29,7 +28,7 @@
 						<td class="label"><label for="tiramizoo_packed_individually"><?php echo $this->__('Packed individually') ?></label></td>
 						<td class="value">
 							<select id="tiramizoo_packed_individually" name="tiramizoo_packed_individually">
-							<?php 
+							<?php
 								$options = Mage::getModel('tiramizoo/entity_attribute_source_packed')
 									->getAllOptions();
 							foreach ($options as $option): ?>
@@ -41,7 +40,7 @@
 					</tr>
 
 					<?php
-					$tiramizooProduct = Mage::getModel('tiramizoo/product', $product); 
+					$tiramizooProduct = Mage::getModel('tiramizoo/product', $product);
 					$dimensions = $tiramizooProduct->getDimensions();
 
 					if ($dimensions): ?>
@@ -54,14 +53,14 @@
 						<?php
 							switch($dimensions['destination_type']) {
 								case 'product':
-									echo 'product';
+									echo $this->__('product');
 									break;
 								case 'category':
 									$category = Mage::getModel('catalog/category')->load($dimensions['destination_id']);
-								echo 'category: <strong>'.$category->getName().'</strong>';
+								echo $this->__('category') . ': <strong>'.$category->getName().'</strong>';
 									break;
 								case 'config':
-								echo 'configuration';
+								echo $this->__('configuration');
 									break;
 							}
 						?>
@@ -70,7 +69,7 @@
 						<?php
 							foreach(array('weight', 'width', 'height', 'length') as $var): ?>
 								<tr>
-									<td><strong><?= ucwords($var) ?></strong>: <?= $dimensions[$var] ?></td>
+									<td><strong><?= $this->__(ucwords($var)) ?></strong>: <?= $dimensions[$var] ?></td>
 								</tr>
 						<?php endforeach; ?>
 							</table>
@@ -102,7 +101,7 @@
 						<td class="label"><label for="meta_keyword"><?php echo $this->__('Is packed individually') ?></label></td>
 						<td class="value">
 							<span>
-								<?= !$tiramizooProduct->isPackedIndividually() ? __('No') : __('Yes') ?><br>
+								<?= !$tiramizooProduct->isPackedIndividually() ?  $this->__('No') :  $this->__('Yes') ?><br>
 							</span>
 						</td>
 						<td class="scope-label"><span class="nobr"></span></td>

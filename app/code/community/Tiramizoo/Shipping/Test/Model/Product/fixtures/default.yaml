@@ -23,7 +23,7 @@ config:
   default/tiramizoo_config/api_config/product_width_mapping: width
   default/tiramizoo_config/api_config/product_height_mapping: height
   default/tiramizoo_config/api_config/product_length_mapping: length
-  default/tiramizoo_config/api_config/packing_strategy: individual
+  default/tiramizoo_config/api_config/packing_strategy: onepackage
   default/tiramizoo_config/api_config/product_weight: 10
   default/tiramizoo_config/api_config/product_width: 20
   default/tiramizoo_config/api_config/product_height: 30
@@ -163,6 +163,7 @@ eav:
       parent_id: 1
       children_count: 0
       is_active: 1
+      trmz_cat_packed_individually: -1
       # category_products_weight: 2
       # category_products_height: 2
       # category_products_length: 2
@@ -334,7 +335,7 @@ eav:
       # length: 30
       # weight: 1
       tiramizoo_enable: 0
-      tiramizoo_packed_individually: 0
+      tiramizoo_packed_individually: 1
       short_description: New clean product
       description: New clean product
       url_key: new-clean-product
@@ -343,6 +344,28 @@ eav:
       is_in_stock: 1
       category_ids:
         - 10
+      price: 59.99
+      tax_class_id: 2
+      status: 1
+      visibility: 4
+    - entity_id: 9
+      type_id: simple
+      sku: 1234567
+      name: New product
+      # width: 35
+      # height: 40
+      # length: 30
+      weight: 1
+      tiramizoo_enable: 0
+      tiramizoo_packed_individually: 0
+      short_description: New product
+      description: New product
+      url_key: url-1
+      stock:
+      qty: 210.00
+      is_in_stock: 1
+      # category_ids:
+      #   - 8
       price: 59.99
       tax_class_id: 2
       status: 1

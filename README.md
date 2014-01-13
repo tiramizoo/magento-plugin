@@ -177,6 +177,10 @@ The tiramizoo shipping method is only available if the following rules are met:
 
     Yes
 
+-   **Order rewrite**
+
+
+
 
 ## Troubleshooting and bugs ##
 

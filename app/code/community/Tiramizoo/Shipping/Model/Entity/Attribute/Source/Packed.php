@@ -2,11 +2,16 @@
 
 class Tiramizoo_Shipping_Model_Entity_Attribute_Source_Packed extends Mage_Eav_Model_Entity_Attribute_Source_Abstract 
 {
-	protected $_packedOptions = array(
-		-1 => 'No',
-		0 => 'Inherit',
-		1 => 'Yes',
-	);
+	protected $_packedOptions = array();
+
+    public function __construct() 
+    {
+        $this->_packedOptions = array(
+            -1 => Mage::helper('tiramizoo_shipping')->__('No'),
+            0 => Mage::helper('tiramizoo_shipping')->__('Inherit'),
+            1 => Mage::helper('tiramizoo_shipping')->__('Yes'),
+        );
+    }
 
     public function getAllOptions()
     {

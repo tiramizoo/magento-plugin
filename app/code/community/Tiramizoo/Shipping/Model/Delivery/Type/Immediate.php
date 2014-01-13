@@ -78,10 +78,10 @@ class Tiramizoo_Shipping_Model_Delivery_Type_Immediate extends Tiramizoo_Shippin
 	 *
 	 * @return bool
 	 */
-	public function hasTimeWindow($timeWindow)
+	public function hasTimeWindow($hash)
 	{
 		$immediateTimeWindow = $this->getImmediateTimeWindow();
 
-        return $immediateTimeWindow->getHash() == $timeWindow;
+        return $immediateTimeWindow->getHash() == $hash;
 	}
 }

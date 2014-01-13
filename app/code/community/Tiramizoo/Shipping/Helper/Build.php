@@ -268,13 +268,13 @@ class Tiramizoo_Shipping_Helper_Build extends Mage_Core_Helper_Abstract
      */
     public function buildItems()
     {
-        $sPackageStrategy = $this->getPackingStrategy();
+        $packageStrategy = $this->getPackingStrategy();
         $itemWasBuilt = null;
         $return = false;
         $this->_useStandardPackage = false;
         $onePackage = $this->getOnePackageDimensions();
 
-        if ($sPackageStrategy == 'onepackage') {
+        if ($packageStrategy == 'onepackage') {
             $this->_useStandardPackage = $this->_useStandardPackage(
                 $onePackage->width,
                 $onePackage->length,

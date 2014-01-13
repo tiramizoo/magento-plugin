@@ -376,6 +376,8 @@ CREATE TABLE IF NOT EXISTS `{$installer->getTable('tiramizoo/order')}` (
     `api_response` text NULL DEFAULT NULL,
     `webhook_response` text NULL DEFAULT NULL,
     `webhook_updated_at` DATE NULL DEFAULT NULL,
+    `repeats` int(11) NOT NULL DEFAULT 1,
+    `send_at` timestamp,
     PRIMARY KEY (`id`),
     UNIQUE KEY `number` (`external_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

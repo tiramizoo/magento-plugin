@@ -47,13 +47,19 @@ class Tiramizoo_Shipping_Model_Observer
             Mage::getModel('tiramizoo/response', $response);
 
             $trackingUrl = null;
+            $status = null;
 
             if (isset($response['http_status']) && $response['http_status'] == '201') {
                 $trackingUrl = $response['response']->tracking_url;
+                $status = isset($response['response']->state) ? $response['response']->state : null;
             }
 
+
+
 			$tiramizooOrder = Mage::getModel('tiramizoo/order')->load($quote->getId(), 'quote_id')
-				->setOrderId($order->getId())
+                ->setSendAt(time())
+                ->setOrderId($order->getId())
+				->setStatus($status)
                 ->setTrackingUrl($trackingUrl)
 				->setExternalId($buildData->external_id)
 				->setApiRequest(json_encode($buildData))
@@ -115,7 +121,7 @@ class Tiramizoo_Shipping_Model_Observer
                         if (!$rateModel->hasTimeWindow($hash)) {
                             $checkout->setGotoSection('shipping_method');
                             $checkout->setUpdateSection('shipping-method');
-                            throw new Mage_Core_Exception('Tiramizoo time window is expired.');
+                            throw new Mage_Core_Exception(Mage::helper('tiramizoo_shipping')->__('Tiramizoo time window is expired.'));
                         }
                     }
 
@@ -153,12 +159,12 @@ class Tiramizoo_Shipping_Model_Observer
             }
 
             if (!$requiredValid) {
-                $message = 'Tiramizoo can not be set to active, minimal configuration is required!';
+                $message = Mage::helper('tiramizoo_shipping')->__('Tiramizoo can not be set to active, minimal configuration is required!');
                 Mage::getSingleton('core/session')->addError($message);
             }
 
             if (!$tiramizooShippingMethodValid) {
-                $message = 'Tiramizoo Shipping Method configuration is incomplete!';
+                $message = Mage::helper('tiramizoo_shipping')->__('Tiramizoo Shipping Method configuration is incomplete!');
                 Mage::getSingleton('core/session')->addError($message);
                 // $url = Mage::getUrl('adminhtml/system_config/edit', array('section'=>'carriers'));
             }

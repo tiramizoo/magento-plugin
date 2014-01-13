@@ -13,7 +13,7 @@ class Tiramizoo_Shipping_Block_Button extends Mage_Adminhtml_Block_System_Config
         $html = $this->getLayout()->createBlock('adminhtml/widget_button')
                     ->setType('button')
                     ->setClass('scalable')
-                    ->setLabel('Synchronize')
+                    ->setLabel($this->__('Synchronize'))
                     ->setOnClick("setLocation('$url')")
                     ->toHtml();
 

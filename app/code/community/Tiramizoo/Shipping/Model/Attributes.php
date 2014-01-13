@@ -8,7 +8,7 @@ class Tiramizoo_Shipping_Model_Attributes
         $attributes = Mage::getResourceModel('catalog/product_attribute_collection')
             ->getItems();
 
-        $attributesArray = array(array('label' => '-- select one --'));
+        $attributesArray = array(array('label' => Mage::helper('tiramizoo_shipping')->__('-- select one --')));
 
         foreach ($attributes as $attribute)
         {

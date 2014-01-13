@@ -8,18 +8,11 @@ class Tiramizoo_Shipping_Model_Api extends TiramizooApi
     protected $_apiToken = null;
 
     /**
-     * Array of available working hours used for lazy loading
-     * 
-     * @var mixed 
-     */
-    protected $_aAvailableWorkingHours = null;
-
-    /**
      * Array of remote configuration used for lazy loading
      * 
      * @var mixed 
      */
-    protected $_aRemoteConfiguration = null;
+    protected $_remoteConfiguration = null;
     
     /**
      * Create the API object with API token and url
@@ -69,30 +62,30 @@ class Tiramizoo_Shipping_Model_Api extends TiramizooApi
     {
         $data = array();
         
-        if ($this->_aRemoteConfiguration === null) {
+        if ($this->_remoteConfiguration === null) {
             $result = null;
-            $this->requestGet('configuration', $data, $this->_aRemoteConfiguration);
+            $this->requestGet('configuration', $data, $this->_remoteConfiguration);
         }
 
-        if ($this->_aRemoteConfiguration['http_status'] != 200) {
+        if ($this->_remoteConfiguration['http_status'] != 200) {
             throw new Exception("Can't connect to Tiramizoo API");
         }
 
-        return $this->_aRemoteConfiguration;
+        return $this->_remoteConfiguration;
     }
 
     /**
      * Get service areas
      * 
-     * @param string $sPostalCode postal code 
-     * @param string $aRangeDates range dates
+     * @param string $postalCode postal code 
+     * @param string $rangeDates range dates
      * 
      * @return mixed Array with status code of request and response data
      */
-    public function getAvailableServiceAreas($sPostalCode, $aRangeDates = array())
+    public function getAvailableServiceAreas($postalCode, $rangeDates = array())
     {
         $response = null;
-        $this->requestGet('service_areas/' . $sPostalCode, $aRangeDates, $response);
+        $this->requestGet('service_areas/' . $postalCode, $rangeDates, $response);
         
         return $response;
     }
