@@ -1,4 +1,17 @@
 <?php
+/**
+ * This file is part of the Tiramizoo_Shipping magento plugin.
+ *
+ * LICENSE: This source file is subject to the MIT license that is available
+ * through the world-wide-web at the following URI:
+ * http://opensource.org/licenses/mit-license.php
+ *
+ * @category  module
+ * @package   Tiramizoo_Shipping
+ * @author    Tiramizoo GmbH <support@tiramizoo.com>
+ * @copyright Tiramizoo GmbH
+ * @license   http://opensource.org/licenses/mit-license.php MIT License
+ */
 
 class Tiramizoo_Shipping_Model_Resend
 {
@@ -82,5 +95,13 @@ class Tiramizoo_Shipping_Model_Resend
         $tiramizooOrder->setStatus('error');
         $tiramizooOrder->setRepeats($tiramizooOrder->getRepeats() + 1);
         $tiramizooOrder->save();
+
+        //Add error to notification inbox
+        $notification = Mage::getModel('adminnotification/inbox');
+        $notification->setSeverity(2);
+        $notification->setTitle('Erorr with sending order to Tiramizoo, order: ' . $tiramizooOrder->getOrderId());
+        $notification->setDescription('Please contact to Tiramizoo Support support@tiramizoo.com');
+        $notification->setUrl(Mage::getUrl('adminhtml/sales_order/view/', array('order_id' => $tiramizooOrder->getOrderId())));
+        $notification->save();
     }
 }

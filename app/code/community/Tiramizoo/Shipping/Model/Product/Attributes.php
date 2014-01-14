@@ -1,4 +1,17 @@
 <?php
+/**
+ * This file is part of the Tiramizoo_Shipping magento plugin.
+ *
+ * LICENSE: This source file is subject to the MIT license that is available
+ * through the world-wide-web at the following URI:
+ * http://opensource.org/licenses/mit-license.php
+ *
+ * @category  module
+ * @package   Tiramizoo_Shipping
+ * @author    Tiramizoo GmbH <support@tiramizoo.com>
+ * @copyright Tiramizoo GmbH
+ * @license   http://opensource.org/licenses/mit-license.php MIT License
+ */
 
 class Tiramizoo_Shipping_Model_Product_Attributes
 {
@@ -20,9 +33,9 @@ class Tiramizoo_Shipping_Model_Product_Attributes
         $result = array();
 
         if (
-            ($result['weight'] = $this->_product->getWeight()) && 
-            ($result['width'] = $this->_product->getData($this->_mapping['width'])) && 
-            ($result['height'] = $this->_product->getData($this->_mapping['height'])) && 
+            ($result['weight'] = $this->_product->getWeight()) &&
+            ($result['width'] = $this->_product->getData($this->_mapping['width'])) &&
+            ($result['height'] = $this->_product->getData($this->_mapping['height'])) &&
             ($result['length'] = $this->_product->getData($this->_mapping['length']))
         ) {
             $result['destination_type'] = 'product';
@@ -34,7 +47,7 @@ class Tiramizoo_Shipping_Model_Product_Attributes
                     'height'    => &$result['height'],
                     'length'    => &$result['length'],
                 ));
-            
+
             $dim = array($result['width'], $result['height'], $result['length']);
             $result['size'] = min($dim) + max($dim);
         } else {
@@ -45,7 +58,7 @@ class Tiramizoo_Shipping_Model_Product_Attributes
 
     }
 
-    public function isEnable() 
+    public function isEnable()
     {
         // @todo
         return (bool) $this->_product->getData('tiramizoo_enable');
@@ -55,7 +68,7 @@ class Tiramizoo_Shipping_Model_Product_Attributes
     {
         return (int) $this->_product->getData('tiramizoo_enable');
     }
-    
+
     public function getPackedIndividually()
     {
         return (int) $this->_product->getData('tiramizoo_packed_individually');

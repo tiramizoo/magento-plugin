@@ -177,10 +177,31 @@ The tiramizoo shipping method is only available if the following rules are met:
 
     Yes
 
--   **Order rewrite**
+-   **Onepage model rewrite**
 
+    Onepage model Tiramizoo_Shipping_Model_Type_Onepage was rewrited by the plugin. Event checkout_type_onepage_save_order_before was added at the start of saveOrder method. If any other plugin is rewriting the same core file Tiramizoo Shipping module will not work properly. In this article http://stackoverflow.com/questions/14815717/multiple-modules-overriding-same-core-file-in-magento is explained how to resolve conflicts with multiple modules overriding same core file.
 
+-   **Tiramizoo Shipping events (Change cost calculation of delivery, convert product and category dimensions)**
 
+    Default price paid by customer for every delivery is set in Shipping methods (System -> Configuration -> Shipping methods) and it could be changed. If needed that price is depended on conditions like product dimensions, cart total price, product amount in cart or any other factor it should be done by using of event `tiramizoo_shipping_modify_rates_price`.
+
+    Tiramizoo API expects product dimensions in centimeters. So if Your product/category dimensions attributes has another units like meters or inches You can conveert them by using events `tiramizoo_shipping_convert_product_dimensions` and `tiramizoo_shipping_convert_category_dimensions`.
+
+    There are some examples in [TestObserver](https://github.com/tiramizoo/magento-plugin/blob/master/app/code/community/Tiramizoo/Shipping/Model/TestObserver.php) class.
+
+-   **Product dimensions and weight, packing individually, is enable inheritance**
+
+    Tiramizoo API expects that every single product has specified dimensions and weight. If You don't want to specify dimensions for each product You can define dimensions and weight for all products in Tiramizoo module configuration. But if product in some categories has different dimensions You can specified these values for each category. The dimensions of parent category are applied for each subcategory that does not have specified dimensions. Notice that dimensions are inherited down only if all are filled. If product is assigned to some independent category subtree dimensions will be inherited from category that have the biggest volume. In Product edit Tiramizoo Option tab You can check effective product's dimensions.
+
+    Inheritance of Is enable and is packing individually attribute works a little differently.
+
+    Product is disable if any category in categories subtree has Is enable attribute value set to No or directly product Is enable attribute has value no.
+
+    Product is enable if every category in categories subtree has Is enable attribute set to Yes or Inherit and directly product Is enable attribute has value Yes or inherit.
+
+    Product Is packed individually if all nodes of category subtree have Is packed individually attribute set to Yes or inherit (inherit: if Packing strategy is set to value All products have individual dimensions) and directly product Is packed individually attribute has value Yes or inherit.
+
+    Product Is not packed individually if all nodes of category subtree have Is packed individually attribute set to No or inherit (inherit: if Packing strategy is not set to value All products have individual dimensions) and directly product Is packed individually attribute has value No or inherit.
 
 ## Troubleshooting and bugs ##
 

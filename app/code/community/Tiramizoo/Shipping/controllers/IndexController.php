@@ -1,9 +1,22 @@
 <?php
+/**
+ * This file is part of the Tiramizoo_Shipping magento plugin.
+ *
+ * LICENSE: This source file is subject to the MIT license that is available
+ * through the world-wide-web at the following URI:
+ * http://opensource.org/licenses/mit-license.php
+ *
+ * @category  module
+ * @package   Tiramizoo_Shipping
+ * @author    Tiramizoo GmbH <support@tiramizoo.com>
+ * @copyright Tiramizoo GmbH
+ * @license   http://opensource.org/licenses/mit-license.php MIT License
+ */
 
-class Tiramizoo_Shipping_IndexController extends Mage_Core_Controller_Front_Action 
+class Tiramizoo_Shipping_IndexController extends Mage_Core_Controller_Front_Action
 {
     /**
-     * Check time window hash 
+     * Check time window hash
      */
     public function checkTimeWindowAction()
     {
@@ -18,7 +31,7 @@ class Tiramizoo_Shipping_IndexController extends Mage_Core_Controller_Front_Acti
             $rates = Mage::helper('tiramizoo_shipping/data')->getAvailableShippingRates();
 
             if (array_key_exists($shippingMethod, $rates)) {
-                $apiToken = Mage::getSingleton('checkout/session')->getData('tiramizoo_api_token');    
+                $apiToken = Mage::getSingleton('checkout/session')->getData('tiramizoo_api_token');
                 if ($apiToken) {
                     $retailLocation = Mage::getModel('tiramizoo/retaillocation', array('api_token' => $apiToken));
                     $rateModel = Mage::getModel('tiramizoo/delivery_type_'.$rates[$shippingMethod], $retailLocation);

@@ -1,4 +1,17 @@
 <?php
+/**
+ * This file is part of the Tiramizoo_Shipping magento plugin.
+ *
+ * LICENSE: This source file is subject to the MIT license that is available
+ * through the world-wide-web at the following URI:
+ * http://opensource.org/licenses/mit-license.php
+ *
+ * @category  module
+ * @package   Tiramizoo_Shipping
+ * @author    Tiramizoo GmbH <support@tiramizoo.com>
+ * @copyright Tiramizoo GmbH
+ * @license   http://opensource.org/licenses/mit-license.php MIT License
+ */
 
 class Tiramizoo_Shipping_Model_Retaillocation extends Mage_Core_Helper_Abstract
 {
@@ -18,7 +31,7 @@ class Tiramizoo_Shipping_Model_Retaillocation extends Mage_Core_Helper_Abstract
 
     /**
      * @param Array $args
-     * 
+     *
      * @return null
      */
     public function __construct($args = array())
@@ -45,7 +58,7 @@ class Tiramizoo_Shipping_Model_Retaillocation extends Mage_Core_Helper_Abstract
 
             if (count($result) != 3) {
                 throw new Exception('Api Token is not valid.');
-            } 
+            }
 
             $return = $result[0].'/'.$result[1];
         } else {
@@ -74,11 +87,11 @@ class Tiramizoo_Shipping_Model_Retaillocation extends Mage_Core_Helper_Abstract
     public function getServiceAreas($name)
     {
         $return = false;
-        
+
         if (!$this->_serviceAreas) {
             $this->_serviceAreas = Mage::getStoreConfig($this->getServiceAreasPath());
         }
-            
+
         if ($this->_serviceAreas) {
             $config = json_decode($this->_serviceAreas, true);
 
@@ -87,17 +100,17 @@ class Tiramizoo_Shipping_Model_Retaillocation extends Mage_Core_Helper_Abstract
             }
         }
 
-        return $return;       
+        return $return;
     }
 
     public function getParam($name)
     {
         $return = false;
-        
+
         if (!$this->_config) {
             $this->_config = Mage::getStoreConfig($this->getConfigPath());
         }
-            
+
         if ($this->_config) {
             $config = json_decode($this->_config, true);
 
@@ -172,11 +185,11 @@ class Tiramizoo_Shipping_Model_Retaillocation extends Mage_Core_Helper_Abstract
 
     	$result = Mage::getModel('tiramizoo/api', array('api_token' => $this->_apiToken))
         	->getRemoteConfiguration();
-        
+
         if ($result['http_status'] != 200) {
             throw new Exception("Can't connect to Tiramizoo API", 1);
         }
-        
+
         if (isset($result['response'])) {
             Mage::getModel('core/config')->saveConfig($path, json_encode($result['response']));
             $this->_config = json_encode($result['response']);

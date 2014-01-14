@@ -1,4 +1,17 @@
 <?php
+/**
+ * This file is part of the Tiramizoo_Shipping magento plugin.
+ *
+ * LICENSE: This source file is subject to the MIT license that is available
+ * through the world-wide-web at the following URI:
+ * http://opensource.org/licenses/mit-license.php
+ *
+ * @category  module
+ * @package   Tiramizoo_Shipping
+ * @author    Tiramizoo GmbH <support@tiramizoo.com>
+ * @copyright Tiramizoo GmbH
+ * @license   http://opensource.org/licenses/mit-license.php MIT License
+ */
 
 class Tiramizoo_Shipping_Model_Category
 {
@@ -20,7 +33,7 @@ class Tiramizoo_Shipping_Model_Category
         return $this->_attributes[$id];
     }
 
-    private function getParent() 
+    private function getParent()
     {
         if (!$this->_data) {
             $this->_data = $this->_getParent($this->_category);
@@ -47,7 +60,7 @@ class Tiramizoo_Shipping_Model_Category
             $category = Mage::getModel('catalog/category')->load($id);
 
             $data = $this->_getParent($category);
-            
+
             foreach ($data as $id => $catData) {
                 $return[$id] = $catData;
             }
@@ -93,7 +106,7 @@ class Tiramizoo_Shipping_Model_Category
                 $return = false;
                 break;
             }
-            
+
             if ($catData['packed'] == 1) {
                 $return = true;
             }

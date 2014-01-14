@@ -134,7 +134,7 @@
             </payment_method_is_active>
 
             <!-- START Test Events -->
-            <tiramizoo_shipping_convert_product_dimensions>
+<!--             <tiramizoo_shipping_convert_product_dimensions>
                 <observers>
                     <convert_product_dimensions>
                         <type>singleton</type>
@@ -163,7 +163,7 @@
                     </modify_rates_price>
                 </observers>
             </tiramizoo_shipping_modify_rates_price>
-            <!-- END Test Events -->
+ -->            <!-- END Test Events -->
 
         </events>
 
@@ -188,15 +188,6 @@
             </modules>
         </translate>
         <events>
-            <controller_action_predispatch>
-                <observers>
-                    <tiramizoo_notification>
-                        <type>singleton</type>
-                        <class>Tiramizoo_Shipping_Model_Feed</class>
-                        <method>observe</method>
-                    </tiramizoo_notification>
-                </observers>
-            </controller_action_predispatch>
             <catalog_product_save_after>
                 <observers>
                     <tiramizoo_save_product_data>
@@ -281,7 +272,7 @@
         <jobs>
             <tiramizoo_synchronize>
                 <schedule>
-                    <cron_expr>0 1,5,9,13,17,21 * * *</cron_expr>
+                    <cron_expr>0 1,7,13,19 * * *</cron_expr>
                 </schedule>
                 <run>
                     <model>tiramizoo/retaillocations::synchronize</model>

@@ -1,4 +1,17 @@
 <?php
+/**
+ * This file is part of the Tiramizoo_Shipping magento plugin.
+ *
+ * LICENSE: This source file is subject to the MIT license that is available
+ * through the world-wide-web at the following URI:
+ * http://opensource.org/licenses/mit-license.php
+ *
+ * @category  module
+ * @package   Tiramizoo_Shipping
+ * @author    Tiramizoo GmbH <support@tiramizoo.com>
+ * @copyright Tiramizoo GmbH
+ * @license   http://opensource.org/licenses/mit-license.php MIT License
+ */
 
 class Tiramizoo_Shipping_Model_Delivery_Type_Evening extends Tiramizoo_Shipping_Model_Delivery_Type
 {
@@ -76,7 +89,7 @@ class Tiramizoo_Shipping_Model_Delivery_Type_Evening extends Tiramizoo_Shipping_
             foreach ($this->_timeWindows as $_timeWindow)
             {
 				$timeWindow = Mage::getModel('tiramizoo/time_window', $_timeWindow);
-				
+
                 if ($timeWindow->isValid()
                     && $timeWindow->hasHours($presetHours)
                     && $timeWindow->isToday()
