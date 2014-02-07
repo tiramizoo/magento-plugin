@@ -376,25 +376,85 @@ if ($attrIdTest === false) {
 }
 
 // Tiramizoo order table
-$installer->run("
-CREATE TABLE IF NOT EXISTS `{$installer->getTable('tiramizoo/order')}` (
-    `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-    `time_window_hash` varchar(40) NULL DEFAULT NULL,
-    `quote_id` int(11) NULL DEFAULT NULL,
-    `order_id` int(11) NULL DEFAULT NULL,
-    `status` varchar(255) NULL DEFAULT NULL,
-    `tracking_url` varchar(255) NULL DEFAULT NULL,
-    `external_id` varchar(40) NULL DEFAULT NULL,
-    `api_request` text NULL DEFAULT NULL,
-    `api_response` text NULL DEFAULT NULL,
-    `webhook_response` text NULL DEFAULT NULL,
-    `webhook_updated_at` DATE NULL DEFAULT NULL,
-    `repeats` int(11) NOT NULL DEFAULT 1,
-    `send_at` timestamp,
-    PRIMARY KEY (`id`),
-    UNIQUE KEY `number` (`external_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-");
+$table = $installer->getConnection()->newTable($installer->getTable('tiramizoo/order'))
+    ->addColumn('id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
+        'unsigned' => true,
+        'identity' => true,
+        'nullable' => false,
+        'primary'  => true,
+    ), 'Entity id')
+    ->addColumn('time_window_hash', Varien_Db_Ddl_Table::TYPE_TEXT, 40, array(
+        'nullable' => true,
+        'default' => null,
+    ), 'Time window hash using md5')
+    ->addColumn('quote_id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
+        'nullable' => true,
+        'default' => null,
+    ), 'Quote entity id')
+    ->addColumn('order_id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
+        'nullable' => true,
+        'default' => null,
+    ), 'Order entity id')
+    ->addColumn('status', Varien_Db_Ddl_Table::TYPE_TEXT, 255, array(
+        'nullable' => true,
+        'default' => null,
+    ), 'Order status')
+    ->addColumn('tracking_url', Varien_Db_Ddl_Table::TYPE_TEXT, 255, array(
+        'nullable' => true,
+        'default' => null,
+    ), 'Tiramizoo tracking url')
+    ->addColumn('external_id', Varien_Db_Ddl_Table::TYPE_TEXT, 40, array(
+        'nullable' => true,
+        'default' => null,
+    ), 'External order id, send to API')
+    ->addColumn('api_request', Varien_Db_Ddl_Table::TYPE_TEXT, '4M', array(
+        'nullable' => true,
+        'default'  => null,
+    ), 'API request data')
+    ->addColumn('api_response', Varien_Db_Ddl_Table::TYPE_TEXT, '4M', array(
+        'nullable' => true,
+        'default'  => null,
+    ), 'API response data')
+    ->addColumn('webhook_response', Varien_Db_Ddl_Table::TYPE_TEXT, '4M', array(
+        'nullable' => true,
+        'default'  => null,
+    ), 'Webhook response data')
+    ->addColumn('webhook_updated_at', Varien_Db_Ddl_Table::TYPE_DATE, null, array(
+        'nullable' => true,
+        'default'  => null,
+    ), 'Webhook receive date')
+    ->addColumn('repeats', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
+        'nullable' => false,
+        'default'  => 1,
+    ), 'Order sending repeats')
+    ->addColumn('send_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array(
+        'nullable' => true,
+        'default'  => null,
+    ), 'Send date time')
+    ->addIndex(
+        $installer->getIdxName(
+            $installer->getTable('tiramizoo/order'), array('quote_id'), Varien_Db_Adapter_Interface::INDEX_TYPE_INDEX
+        ),
+        array('quote_id'),
+        array('type' => Varien_Db_Adapter_Interface::INDEX_TYPE_INDEX)
+    )
+    ->addIndex(
+        $installer->getIdxName(
+            $installer->getTable('tiramizoo/order'), array('order_id'), Varien_Db_Adapter_Interface::INDEX_TYPE_INDEX
+        ),
+        array('order_id'),
+        array('type' => Varien_Db_Adapter_Interface::INDEX_TYPE_INDEX)
+    )
+    ->addIndex(
+        $installer->getIdxName(
+            $installer->getTable('tiramizoo/order'), array('external_id'), Varien_Db_Adapter_Interface::INDEX_TYPE_UNIQUE
+        ),
+        array('external_id'),
+        array('type' => Varien_Db_Adapter_Interface::INDEX_TYPE_UNIQUE)
+    )
+    ->setComment('Tiramizoo order');
+
+    $installer->getConnection()->createTable($table);
 
 
 $installer->endSetup();
