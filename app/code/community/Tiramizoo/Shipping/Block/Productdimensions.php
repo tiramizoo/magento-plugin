@@ -13,8 +13,21 @@
  * @license   http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * Productdimensions form fields renderer
+ *
+ * @category   module
+ * @package    Tiramizoo_Shipping
+ * @author     Tiramizoo GmbH <support@tiramizoo.com>
+ */
 class Tiramizoo_Shipping_Block_Productdimensions extends Mage_Adminhtml_Block_System_Config_Form_Field
 {
+    /**
+     * Get the element contents
+     *
+     * @param Varien_Data_Form_Element_Abstract $element
+     * @return string
+     */
     protected function _getElementHtml(Varien_Data_Form_Element_Abstract $element)
     {
         $this->setElement($element);

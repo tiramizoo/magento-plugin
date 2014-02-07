@@ -13,9 +13,20 @@
  * @license   http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * Synchronize configuration with all reatial locations
+ *
+ * @category   module
+ * @package    Tiramizoo_Shipping
+ * @author     Tiramizoo GmbH <support@tiramizoo.com>
+ */
 class Tiramizoo_Shipping_Adminhtml_SynchronizeController extends Mage_Adminhtml_Controller_Action
 {
-
+    /**
+     * Run config synchronization for all retail locations
+     *
+     * @return null
+     */
     public function indexAction()
     {
         Mage::getModel('tiramizoo/retaillocations')->synchronize();

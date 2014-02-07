@@ -13,6 +13,13 @@
  * @license   http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * Tiramizoo API object build helper
+ *
+ * @category   module
+ * @package    Tiramizoo_Shipping
+ * @author     Tiramizoo GmbH <support@tiramizoo.com>
+ */
 class Tiramizoo_Shipping_Helper_Build extends Mage_Core_Helper_Abstract
 {
 
@@ -416,6 +423,11 @@ class Tiramizoo_Shipping_Helper_Build extends Mage_Core_Helper_Abstract
                 && $stdPackageWeight;
     }
 
+    /**
+     * Get one package dimensions as object
+     *
+     * @return stdClass dimensions
+     */
     public function getOnePackageDimensions()
     {
         $item = new stdClass();
@@ -427,9 +439,13 @@ class Tiramizoo_Shipping_Helper_Build extends Mage_Core_Helper_Abstract
         return $item;
     }
 
+    /**
+     * Get packing strategy
+     *
+     * @return string packing strategy
+     */
     public function getPackingStrategy()
     {
         return Mage::getStoreConfig('tiramizoo_config/api_config/packing_strategy');
     }
-
 }

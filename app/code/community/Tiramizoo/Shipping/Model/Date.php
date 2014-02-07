@@ -13,6 +13,13 @@
  * @license   http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * Date object
+ *
+ * @category   module
+ * @package    Tiramizoo_Shipping
+ * @author     Tiramizoo GmbH <support@tiramizoo.com>
+ */
 class Tiramizoo_Shipping_Model_Date
 {
     /**
@@ -29,7 +36,7 @@ class Tiramizoo_Shipping_Model_Date
      */
     protected static $_currentTime = 'now';
 
-/**
+    /**
      * Default date format
      *
      * @var string

@@ -13,8 +13,21 @@
  * @license   http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * Debug object. Save info to logs
+ *
+ * @category   module
+ * @package    Tiramizoo_Shipping
+ * @author     Tiramizoo GmbH <support@tiramizoo.com>
+ */
 class Tiramizoo_Shipping_Model_Debug
 {
+    /**
+     * Log message to file
+     *
+     * @param  string $message Log message
+     * @return null
+     */
     public function log($message)
     {
         $debugLoggingIsEnabled = Mage::getStoreConfig('tiramizoo_config/advanced/debug_log', Mage::app()->getStore());

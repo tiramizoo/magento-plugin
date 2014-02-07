@@ -13,10 +13,27 @@
  * @license   http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * Tiramizoo order attribute is packed individually source
+ *
+ * @category   module
+ * @package    Tiramizoo_Shipping
+ * @author     Tiramizoo GmbH <support@tiramizoo.com>
+ */
 class Tiramizoo_Shipping_Model_Entity_Attribute_Source_Packed extends Mage_Eav_Model_Entity_Attribute_Source_Abstract
 {
+    /**
+     * Packed options array
+     *
+     * @var array
+     */
 	protected $_packedOptions = array();
 
+    /**
+     * Initialize options
+     *
+     * @return null
+     */
     public function __construct()
     {
         $this->_packedOptions = array(
@@ -26,6 +43,11 @@ class Tiramizoo_Shipping_Model_Entity_Attribute_Source_Packed extends Mage_Eav_M
         );
     }
 
+    /**
+     * Get options
+     *
+     * @return array
+     */
     public function getAllOptions()
     {
         if (!$this->_options) {
@@ -37,11 +59,21 @@ class Tiramizoo_Shipping_Model_Entity_Attribute_Source_Packed extends Mage_Eav_M
         return $this->_options;
     }
 
+    /**
+     * Get packed options
+     *
+     * @return array
+     */
     public function getOptions()
     {
     	return $this->_packedOptions;
     }
 
+    /**
+     * If key exists in packed options array
+     *
+     * @return bool
+     */
     public function optionExists($value)
     {
     	return array_key_exists($value, $this->_packedOptions);

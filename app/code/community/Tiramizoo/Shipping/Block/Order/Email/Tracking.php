@@ -13,8 +13,21 @@
  * @license   http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * Email tracking block
+ *
+ * @category   module
+ * @package    Tiramizoo_Shipping
+ * @author     Tiramizoo GmbH <support@tiramizoo.com>
+ */
 class Tiramizoo_Shipping_Block_Order_Email_Tracking extends Mage_Core_Block_Template {
 
+    /**
+     * Returns order's tracking url.
+     *
+     * @param  object $order
+     * @return string tracking url
+     */
 	public function getTrackingUrl($order)
 	{
 		$returnUrl = false;

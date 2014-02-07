@@ -15,6 +15,13 @@
 
 include_once 'Tiramizoo/TiramizooApi.php';
 
+/**
+ * Api model
+ *
+ * @category   module
+ * @package    Tiramizoo_Shipping
+ * @author     Tiramizoo GmbH <support@tiramizoo.com>
+ */
 class Tiramizoo_Shipping_Model_Api extends TiramizooApi
 {
 

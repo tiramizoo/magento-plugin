@@ -13,8 +13,21 @@
  * @license   http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * Tiramizoo shipping cart
+ *
+ * @category   module
+ * @package    Tiramizoo_Shipping
+ * @author     Tiramizoo GmbH <support@tiramizoo.com>
+ */
 class Tiramizoo_Shipping_Model_Cart
 {
+    /**
+     * Check cart if is available to tiramizoo
+     *
+     * @param  array  $packageSizes
+     * @return bool
+     */
     public function checkCart($packageSizes = array())
     {
         $cartItems = $this->getQuoteItems();
@@ -41,6 +54,10 @@ class Tiramizoo_Shipping_Model_Cart
         return $return;
     }
 
+    /**
+     * Returns quote items
+     * @return array
+     */
     public function getQuoteItems()
     {
         if (Mage::app()->getStore()->isAdmin()) {

@@ -13,20 +13,37 @@
  * @license   http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * Tiramizoo API response model
+ *
+ * @category   module
+ * @package    Tiramizoo_Shipping
+ * @author     Tiramizoo GmbH <support@tiramizoo.com>
+ */
 class Tiramizoo_Shipping_Model_Response
 {
+    /**
+     * Response
+     *
+     * @var mixed
+     */
     protected $_response = null;
 
+    /**
+     * HTTP status code
+     *
+     * @var mixed
+     */
     protected $_httpStatus = null;
 
     /**
-     * @param Array $response
+     * Initialize
      *
+     * @param Array $response
      * @return null
      */
     public function __construct($response = array())
     {
-
         if (isset($response['http_status'])) {
             $this->_httpStatus = $response['http_status'];
         }
@@ -38,6 +55,11 @@ class Tiramizoo_Shipping_Model_Response
         $this->checkResponse();
     }
 
+    /**
+     * Proccess API response
+     *
+     * @return null
+     */
     private function checkResponse()
     {
         Mage::getModel('tiramizoo/debug')->log('http_status: '.$this->_httpStatus);

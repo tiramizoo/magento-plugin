@@ -13,6 +13,13 @@
  * @license   http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * Tiramizoo shipping observer
+ *
+ * @category   module
+ * @package    Tiramizoo_Shipping
+ * @author     Tiramizoo GmbH <support@tiramizoo.com>
+ */
 class Tiramizoo_Shipping_Model_Observer
 {
 	protected $allowedShippingMethods = array('tiramizoo_immediate', 'tiramizoo_evening');
@@ -25,7 +32,10 @@ class Tiramizoo_Shipping_Model_Observer
     static protected $_singletonFlag = false;
 
 	/**
+     * Try to send order to API
+     *
 	 * @param  Object $event
+     * @return null
 	 */
 	public function saveOrderSuccess(Varien_Event_Observer $event)
 	{
@@ -82,6 +92,12 @@ class Tiramizoo_Shipping_Model_Observer
 
 	}
 
+    /**
+     * Save shipping method
+     *
+     * @param  Varien_Event_Observer $event
+     * @return null
+     */
 	public function saveShippingMethod(Varien_Event_Observer $event)
 	{
 		$request = $event['request'];
@@ -108,6 +124,12 @@ class Tiramizoo_Shipping_Model_Observer
 		}
 	}
 
+    /**
+     * Validate if selected time window is correct
+     *
+     * @param  Varien_Event_Observer $event
+     * @return null
+     */
     public function saveOrderBefore(Varien_Event_Observer $event)
     {
         $quote = $event['quote'];
@@ -144,6 +166,12 @@ class Tiramizoo_Shipping_Model_Observer
 
     }
 
+    /**
+     * Runs afteer saving tiramizoo shipping config
+     *
+     * @param  Varien_Event_Observer $event
+     * @return null
+     */
     public function changeConfig(Varien_Event_Observer $event)
     {
         $rates = Mage::helper('tiramizoo_shipping/data')->getAvailableShippingRates();
@@ -195,6 +223,7 @@ class Tiramizoo_Shipping_Model_Observer
      * this function checks available payment methods
      *
      * @param  Varien_Event_Observer $observer
+     * @return null
      */
     public function paymentMethodIsActive(Varien_Event_Observer $observer)
     {
@@ -226,6 +255,7 @@ class Tiramizoo_Shipping_Model_Observer
      * data or anything you like
      *
      * @param Varien_Event_Observer $observer
+     * @return null
      */
     public function saveProductTabData(Varien_Event_Observer $observer)
     {
@@ -257,6 +287,7 @@ class Tiramizoo_Shipping_Model_Observer
     /**
      * Shortcut to getRequest
      *
+     * @return Mage_Core_Controller_Request_Http
      */
     protected function _getRequest()
     {

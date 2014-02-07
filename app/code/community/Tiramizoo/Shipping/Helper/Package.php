@@ -13,9 +13,23 @@
  * @license   http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * Tiramizohelper Package
+ *
+ * @category   module
+ * @package    Tiramizoo_Shipping
+ * @author     Tiramizoo GmbH <support@tiramizoo.com>
+ */
 class Tiramizoo_Shipping_Helper_Package extends Mage_Core_Helper_Abstract
 {
 
+    /**
+     * Check if dimensions not exceed by package size limit
+     *
+     * @param  array $dimensions
+     * @param  array $packageSizes
+     * @return boolean
+     */
 	public function checkDimensions($dimensions, $packageSizes)
 	{
 		// Biggest package

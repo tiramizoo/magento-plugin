@@ -13,12 +13,22 @@
  * @license   http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * Tiramizoo order collection
+ *
+ * @category   module
+ * @package    Tiramizoo_Shipping
+ * @author     Tiramizoo GmbH <support@tiramizoo.com>
+ */
 class Tiramizoo_Shipping_Model_Mysql4_Order_Collection extends Mage_Core_Model_Mysql4_Collection_Abstract
 {
-
+    /**
+     * Consruct
+     *
+     * @return null
+     */
     protected function _construct()
     {
         $this->_init('tiramizoo/order', 'id');
     }
-
 }

@@ -13,13 +13,31 @@
  * @license   http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * Tiramizoo helper Data
+ *
+ * @category   module
+ * @package    Tiramizoo_Shipping
+ * @author     Tiramizoo GmbH <support@tiramizoo.com>
+ */
 class Tiramizoo_Shipping_Helper_Data extends Mage_Core_Helper_Abstract
 {
+    /**
+     * Get available rates codes
+     *
+     * @var array
+     */
     protected $_shippingRates = array(
         'tiramizoo_immediate' => 'immediate',
         'tiramizoo_evening' => 'evening'
     );
 
+    /**
+     * Return config data from path
+     *
+     * @param  string $path
+     * @return string
+     */
     public function getConfigData($path)
     {
         $store_id = Mage::app()->getStore()->getId();
@@ -38,16 +56,32 @@ class Tiramizoo_Shipping_Helper_Data extends Mage_Core_Helper_Abstract
         }
     }
 
+    /**
+     * Get if tiramizoo is active
+     *
+     * @return int
+     */
     public function isActive()
     {
         return Mage::getStoreConfig('tiramizoo_config/api_config/is_active');
     }
 
+    /**
+     * Get abailable shipping rates
+     *
+     * @return array
+     */
     public function getAvailableShippingRates()
     {
         return $this->_shippingRates;
     }
 
+    /**
+     * Match postal code with service area coverage. Returns Api token
+     *
+     * @param string $code Postal code
+     * @return mixed
+     */
     public function getApiTokenByPostalCode($code)
     {
         $apiToken = null;

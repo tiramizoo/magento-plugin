@@ -13,11 +13,34 @@
  * @license   http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * Tiramizoo product attributes model
+ *
+ * @category   module
+ * @package    Tiramizoo_Shipping
+ * @author     Tiramizoo GmbH <support@tiramizoo.com>
+ */
 class Tiramizoo_Shipping_Model_Product_Attributes
 {
+    /**
+     * Product dimension attributest mapping
+     *
+     * @var array
+     */
     protected $_mapping = array();
+
+    /**
+     * Product model
+     *
+     * @var Mage_Catalog_Model_Product
+     */
     protected $_product = null;
 
+    /**
+     * Clonstruct set product and dimensions mapping array
+     *
+     * @param Mage_Catalog_Model_Product $product
+     */
     public function __construct(Mage_Catalog_Model_Product $product)
     {
         $this->_product = $product;
@@ -28,6 +51,11 @@ class Tiramizoo_Shipping_Model_Product_Attributes
         $this->_mapping['length'] = Mage::getStoreConfig('tiramizoo_config/api_config/product_length_mapping');
     }
 
+    /**
+     * Get dimensions of product
+     *
+     * @return mixed
+     */
     public function getDimensions()
     {
         $result = array();
@@ -58,17 +86,32 @@ class Tiramizoo_Shipping_Model_Product_Attributes
 
     }
 
+    /**
+     * Check is enable attribute value
+     *
+     * @return boolean
+     */
     public function isEnable()
     {
         // @todo
         return (bool) $this->_product->getData('tiramizoo_enable');
     }
 
+    /**
+     * Get is enable attribute value
+     *
+     * @return integer
+     */
     public function getEnable()
     {
         return (int) $this->_product->getData('tiramizoo_enable');
     }
 
+    /**
+     * Get is pacekd indiviually attribute value
+     *
+     * @return integer
+     */
     public function getPackedIndividually()
     {
         return (int) $this->_product->getData('tiramizoo_packed_individually');

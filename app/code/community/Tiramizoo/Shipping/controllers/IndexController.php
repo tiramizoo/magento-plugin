@@ -13,10 +13,19 @@
  * @license   http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * Base tiramizoo front end actions
+ *
+ * @category   module
+ * @package    Tiramizoo_Shipping
+ * @author     Tiramizoo GmbH <support@tiramizoo.com>
+ */
 class Tiramizoo_Shipping_IndexController extends Mage_Core_Controller_Front_Action
 {
     /**
      * Check time window hash
+     *
+     * @return null
      */
     public function checkTimeWindowAction()
     {
@@ -48,5 +57,4 @@ class Tiramizoo_Shipping_IndexController extends Mage_Core_Controller_Front_Acti
             ->setHeader('Content-Type', 'application/json')
             ->setBody(json_encode($json));
     }
-
 }

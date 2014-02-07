@@ -13,15 +13,37 @@
  * @license   http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * Tiramizoo category attributes
+ *
+ * @category   module
+ * @package    Tiramizoo_Shipping
+ * @author     Tiramizoo GmbH <support@tiramizoo.com>
+ */
 class Tiramizoo_Shipping_Model_Category_Attributes
 {
+    /**
+     * Category
+     *
+     * @var Mage_Catalog_Model_Category
+     */
     protected $_category = null;
 
+    /**
+     * Initialize
+     *
+     * @param Mage_Catalog_Model_Category $category
+     */
     public function __construct(Mage_Catalog_Model_Category $category)
     {
         $this->_category = $category;
     }
 
+    /**
+     * Get category dimensions
+     *
+     * @return mixed
+     */
     public function getDimensions()
     {
         $result = array();
@@ -51,17 +73,32 @@ class Tiramizoo_Shipping_Model_Category_Attributes
         return $result;
     }
 
+    /**
+     * Check if category is enable
+     *
+     * @return boolean
+     */
     public function isEnable()
     {
         // @todo
         return (bool) $this->_category->getData('tiramizoo_category_enable');
     }
 
+    /**
+     * Get category's is enable property
+     *
+     * @return boolean
+     */
     public function getEnable()
     {
         return (int) $this->_category->getData('tiramizoo_category_enable');
     }
 
+    /**
+     * Get category's is packed individually property
+     *
+     * @return boolean
+     */
     public function getPackedIndividually()
     {
         return (int) $this->_category->getData('trmz_cat_packed_individually');

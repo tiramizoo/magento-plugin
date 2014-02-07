@@ -13,6 +13,13 @@
  * @license   http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * Delivery type abstract
+ *
+ * @category   module
+ * @package    Tiramizoo_Shipping
+ * @author     Tiramizoo GmbH <support@tiramizoo.com>
+ */
 abstract class Tiramizoo_Shipping_Model_Delivery_Type
 {
 	/**

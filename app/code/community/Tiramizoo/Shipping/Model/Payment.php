@@ -13,9 +13,20 @@
  * @license   http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * Tiramizoo shipping payment information
+ *
+ * @category   module
+ * @package    Tiramizoo_Shipping
+ * @author     Tiramizoo GmbH <support@tiramizoo.com>
+ */
 class Tiramizoo_Shipping_Model_Payment
 {
-
+    /**
+     * Geta all active payment method
+     *
+     * @return mixed
+     */
     public function getActivePaymentMethods()
     {
         $payments = array();
@@ -53,6 +64,11 @@ class Tiramizoo_Shipping_Model_Payment
         return $methods;
     }
 
+    /**
+     * Convert to option array
+     *
+     * @return array
+     */
     public function toOptionArray()
     {
         return $this->getActivePaymentMethods();

@@ -13,25 +13,62 @@
  * @license   http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * Tiramizoo retail locataion model
+ *
+ * @category   module
+ * @package    Tiramizoo_Shipping
+ * @author     Tiramizoo GmbH <support@tiramizoo.com>
+ */
 class Tiramizoo_Shipping_Model_Retaillocation extends Mage_Core_Helper_Abstract
 {
 
+    /**
+     * API token
+     *
+     * @var string
+     */
 	protected $_apiToken = null;
 
+    /**
+     * Location path
+     *
+     * @var string
+     */
     protected $_locationPath = null;
 
+    /**
+     * Config path
+     *
+     * @var string
+     */
     protected $_configPath = '/api_config';
 
+    /**
+     * Config values
+     *
+     * @var string
+     */
     protected $_config = null;
 
+    /**
+     * Service area path
+     *
+     * @var string
+     */
     protected $_serviceAreasPath = '/api_service_areas';
 
+    /**
+     * Config values
+     *
+     * @var string
+     */
     protected $_serviceAreas = null;
 
-
     /**
-     * @param Array $args
+     * Construct. Set API token.
      *
+     * @param Array $args
      * @return null
      */
     public function __construct($args = array())
@@ -47,6 +84,11 @@ class Tiramizoo_Shipping_Model_Retaillocation extends Mage_Core_Helper_Abstract
         $this->_locationPath = $this->getLocationPath();
     }
 
+    /**
+     * Get config location path
+     *
+     * @return string
+     */
     public function getLocationPath()
     {
         if ($this->_locationPath == null) {
@@ -68,6 +110,11 @@ class Tiramizoo_Shipping_Model_Retaillocation extends Mage_Core_Helper_Abstract
         return $return;
     }
 
+    /**
+     * Get full config path
+     *
+     * @return string
+     */
     public function getConfigPath()
     {
         $this->_locationPath = $this->getLocationPath();
@@ -76,6 +123,11 @@ class Tiramizoo_Shipping_Model_Retaillocation extends Mage_Core_Helper_Abstract
         return $path;
     }
 
+    /**
+     * Get full service areas path
+     *
+     * @return string
+     */
     public function getServiceAreasPath()
     {
         $this->_locationPath = $this->getLocationPath();
@@ -84,6 +136,11 @@ class Tiramizoo_Shipping_Model_Retaillocation extends Mage_Core_Helper_Abstract
         return $path;
     }
 
+    /**
+     * Get full service areas
+     *
+     * @return mixed
+     */
     public function getServiceAreas($name)
     {
         $return = false;
@@ -103,6 +160,12 @@ class Tiramizoo_Shipping_Model_Retaillocation extends Mage_Core_Helper_Abstract
         return $return;
     }
 
+    /**
+     * Get param value
+     *
+     * @param  string $name
+     * @return string value
+     */
     public function getParam($name)
     {
         $return = false;
@@ -122,6 +185,11 @@ class Tiramizoo_Shipping_Model_Retaillocation extends Mage_Core_Helper_Abstract
         return $return;
     }
 
+    /**
+     * Get available time windows
+     *
+     * @return array
+     */
     public function getAvailableTimeWindows()
     {
         if ($aTimeWindows = $this->getServiceAreas('time_windows')) {
@@ -141,6 +209,11 @@ class Tiramizoo_Shipping_Model_Retaillocation extends Mage_Core_Helper_Abstract
         return $aTimeWindows ? $aTimeWindows : array();
     }
 
+    /**
+     * Get service areas from API and save to config
+     *
+     * @return object
+     */
     public function saveServiceAreas()
     {
         $pickupContact = $this->getParam('pickup_contact');
@@ -179,6 +252,11 @@ class Tiramizoo_Shipping_Model_Retaillocation extends Mage_Core_Helper_Abstract
         return $this;
     }
 
+    /**
+     * Get config from API and save to config
+     *
+     * @return object
+     */
     public function saveRemoteConfig()
     {
         $path = $this->getConfigPath();
@@ -202,7 +280,6 @@ class Tiramizoo_Shipping_Model_Retaillocation extends Mage_Core_Helper_Abstract
      * Convert recursively stdClass object into an array.
      *
      * @param mixed $data array or stdClass object
-     *
      * @return mixed
      */
     public function objectToArray($data)

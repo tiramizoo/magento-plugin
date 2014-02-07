@@ -13,8 +13,21 @@
  * @license   http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * Tiramizoo one page checkout processing model
+ *
+ * @category   module
+ * @package    Tiramizoo_Shipping
+ * @author     Tiramizoo GmbH <support@tiramizoo.com>
+ */
 class Tiramizoo_Shipping_Model_Type_Onepage extends Mage_Checkout_Model_Type_Onepage
 {
+
+    /**
+     * Add event and call parent method
+     *
+     * @return null
+     */
 	public function saveOrder()
     {
         Mage::getModel('tiramizoo/debug')->log('dispatchEvent: checkout_type_onepage_save_order_before');

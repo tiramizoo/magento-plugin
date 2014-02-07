@@ -13,9 +13,21 @@
  * @license   http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * Tiramizoo shipping attributes
+ *
+ * @category   module
+ * @package    Tiramizoo_Shipping
+ * @author     Tiramizoo GmbH <support@tiramizoo.com>
+ */
 class Tiramizoo_Shipping_Model_Attributes
 {
 
+    /**
+     * Get product eav attributes
+     *
+     * @return array
+     */
     public function getProductEavAttributes()
     {
         $attributes = Mage::getResourceModel('catalog/product_attribute_collection')
@@ -34,6 +46,11 @@ class Tiramizoo_Shipping_Model_Attributes
         return $attributesArray;
     }
 
+    /**
+     * Convert to array
+     *
+     * @return array
+     */
     public function toOptionArray()
     {
         return $this->getProductEavAttributes();

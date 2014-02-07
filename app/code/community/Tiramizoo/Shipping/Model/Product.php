@@ -13,18 +13,59 @@
  * @license   http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * Tiramizoo product model
+ *
+ * @category   module
+ * @package    Tiramizoo_Shipping
+ * @author     Tiramizoo GmbH <support@tiramizoo.com>
+ */
 class Tiramizoo_Shipping_Model_Product
 {
+    /**
+     * Arrays of products and categories disabled ids
+     *
+     * @var array
+     */
     protected $_disableIds = array('product' => array(), 'category' => array());
+
+    /**
+     * Tirmiazoo product attributes model
+     *
+     * @var Tiramizoo_Shipping_Model_Product_Attributes
+     */
     protected $_attributes = null;
+
+    /**
+     * Product model
+     *
+     * @var Mage_Catalog_Model_Product
+     */
     protected $_product = null;
+
+    /**
+     * Product categories data
+     *
+     * @var array
+     */
     protected $_categories = array();
 
+    /**
+     * Construct. Initialize product
+     *
+     * @param Mage_Catalog_Model_Product $product
+     * @return null
+     */
     public function __construct(Mage_Catalog_Model_Product $product)
     {
         $this->_product = $product;
     }
 
+    /**
+     * Initialize and returns tirmiazoo product attributes model
+     *
+     * @return Tiramizoo_Shipping_Model_Product_Attributes
+     */
     public function getAttributes()
     {
         if (!$this->_attributes) {
@@ -33,6 +74,12 @@ class Tiramizoo_Shipping_Model_Product
         return $this->_attributes;
     }
 
+    /**
+     * Initialize and returns tiramizoo caegory model
+     *
+     * @param  int $categoryId
+     * @return Tiramizoo_Shipping_Model_Category
+     */
     public function getCategory($categoryId)
     {
         if (!isset($this->_categories[$categoryId])) {
@@ -41,12 +88,24 @@ class Tiramizoo_Shipping_Model_Product
         return $this->_categories[$categoryId];
     }
 
+    /**
+     * Get full category path with all parents node
+     *
+     * @param  int $categoryId
+     * @return string
+     */
     public function getCategoryPath($categoryId)
     {
         $category = Mage::getModel('catalog/category')->load($categoryId);
         return $category->getPath();
     }
 
+    /**
+     * Get all category subtree leafs ids
+     *
+     * @param  array  $categoryIds
+     * @return array
+     */
     public function getSubtreeLeafsIds(array $categoryIds)
     {
         $paths = array();
@@ -63,6 +122,11 @@ class Tiramizoo_Shipping_Model_Product
         return array_keys($paths);
     }
 
+    /**
+     * Get effective value of product dimensions attributes
+     *
+     * @return mixed
+     */
     public function getDimensions()
     {
         $attributes = $this->getAttributes();
@@ -102,6 +166,11 @@ class Tiramizoo_Shipping_Model_Product
         return $dimensions;
     }
 
+    /**
+     * Get effective value of is available attribute
+     *
+     * @return boolean
+     */
     public function isAvailable()
     {
         Mage::getModel('tiramizoo/debug')->log('/----------------------------------------------------');
@@ -165,11 +234,21 @@ class Tiramizoo_Shipping_Model_Product
         return $return;
     }
 
+    /**
+     * Get disable ids of objects
+     *
+     * @return array
+     */
     public function getDisableIds()
     {
         return $this->_disableIds;
     }
 
+    /**
+     * Returns true if product is disable
+     *
+     * @return boolean
+     */
     public function isDisable()
     {
         $attributes = $this->getAttributes();
@@ -200,6 +279,11 @@ class Tiramizoo_Shipping_Model_Product
         return $return;
     }
 
+    /**
+     * Get effective value of is packed individually attribute
+     *
+     * @return boolean
+     */
     public function isPackedIndividually()
     {
         $attributes = $this->getAttributes();
@@ -238,6 +322,11 @@ class Tiramizoo_Shipping_Model_Product
         return $packedIndividually;
     }
 
+    /**
+     * Get packing strategy value from config
+     *
+     * @return string
+     */
     public function getPackingStrategy()
     {
         return Mage::getStoreConfig('tiramizoo_config/api_config/packing_strategy');

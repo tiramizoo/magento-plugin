@@ -13,9 +13,21 @@
  * @license   http://opensource.org/licenses/mit-license.php MIT License
  */
 
+/**
+ * Tiramizoo retaillocataions model
+ *
+ * @category   module
+ * @package    Tiramizoo_Shipping
+ * @author     Tiramizoo GmbH <support@tiramizoo.com>
+ */
 class Tiramizoo_Shipping_Model_Retaillocations
 {
-    //@todo: duplicate method
+
+    /**
+     * Synchronize all retail locations. Clear the cache.
+     *
+     * @return null
+     */
     public function synchronize()
     {
         $read = Mage::getSingleton('core/resource')->getConnection('core_read');

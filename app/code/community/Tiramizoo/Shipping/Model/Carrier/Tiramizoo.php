@@ -14,8 +14,12 @@
  */
 
 /**
-* Our test shipping method module adapter
-*/
+ * Tiramizoo shipping carrier
+ *
+ * @category   module
+ * @package    Tiramizoo_Shipping
+ * @author     Tiramizoo GmbH <support@tiramizoo.com>
+ */
 class Tiramizoo_Shipping_Model_Carrier_Tiramizoo extends Mage_Shipping_Model_Carrier_Abstract
 {
     /**
@@ -128,6 +132,8 @@ class Tiramizoo_Shipping_Model_Carrier_Tiramizoo extends Mage_Shipping_Model_Car
 
     /**
     * This method is used when viewing / listing Shipping Methods with Codes programmatically
+    *
+    * @return array
     */
     public function getAllowedMethods() {
         return array($this->_code => $this->getConfigData('name'));
