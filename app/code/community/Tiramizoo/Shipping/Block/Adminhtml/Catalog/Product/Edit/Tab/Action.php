@@ -13,10 +13,22 @@
  * @license   http://opensource.org/licenses/mit-license.php MIT License
  */
 
-class Tiramizoo_Shipping_Block_Adminhtml_Catalog_Product_Tab_Action
+/**
+ * Tiramizoo product's information tabs
+ *
+ * @category   module
+ * @package    Tiramizoo_Shipping
+ * @author     Tiramizoo GmbH <support@tiramizoo.com>
+ */
+class Tiramizoo_Shipping_Block_Adminhtml_Catalog_Product_Edit_Tab_Action
     extends Mage_Adminhtml_Block_Template
     implements Mage_Adminhtml_Block_Widget_Tab_Interface
 {
+    /**
+     * Construct. Set product and template.
+     *
+     * @return null
+     */
     public function _construct()
     {
         parent::_construct();
