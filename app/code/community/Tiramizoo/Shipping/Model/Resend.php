@@ -29,14 +29,16 @@ class Tiramizoo_Shipping_Model_Resend
      */
     public function check()
     {
-        $readConnection = Mage::getSingleton('core/resource')->getConnection('core_read');
+        $resource = Mage::getSingleton('core/resource');
+        $readConnection = $resource->getConnection('core_read');
 
         //get the newest orders wihout status
-        $query =   'SELECT id FROM tiramizoo_order
-                        WHERE status IS NULL
-                            AND send_at >= DATE_ADD(\'' . Mage::getSingleton('core/date')->gmtDate() . '\', INTERVAL -30 HOUR_MINUTE)';
+        $select = $readConnection->select()
+                                 ->from($resource->getTableName('tiramizoo/order'), array('id'))
+                                 ->where('status IS NULL')
+                                 ->where('send_at >= DATE_ADD(\'' . Mage::getSingleton('core/date')->gmtDate() . '\', INTERVAL -30 HOUR_MINUTE)');
 
-        $results = $readConnection->fetchAll($query);
+        $results = $readConnection->fetchAll($select);
 
         foreach ($results as $item) {
             $tiramizooOrder = Mage::getModel('tiramizoo/order')->load($item['id']);
@@ -44,11 +46,12 @@ class Tiramizoo_Shipping_Model_Resend
         }
 
         //get older orders wihout status to mark as error
-        $query =   'SELECT id FROM tiramizoo_order
-                        WHERE status IS NULL
-                            AND send_at < DATE_ADD(\'' . Mage::getSingleton('core/date')->gmtDate() . '\', INTERVAL -30 HOUR_MINUTE)';
+        $select = $readConnection->select()
+                                 ->from($resource->getTableName('tiramizoo/order'), array('id'))
+                                 ->where('status IS NULL')
+                                 ->where('send_at < DATE_ADD(\'' . Mage::getSingleton('core/date')->gmtDate() . '\', INTERVAL -30 HOUR_MINUTE)');
 
-        $results = $readConnection->fetchAll($query);
+        $results = $readConnection->fetchAll($select);
 
         foreach ($results as $item) {
             $tiramizooOrder = Mage::getModel('tiramizoo/order')->load($item['id']);
